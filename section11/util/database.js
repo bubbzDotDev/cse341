@@ -1,8 +1,9 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('node-complete', 'root', 'nodecomplete', {
+const sequelize = new Sequelize('cse341', 'root', 'password', {
   dialect: 'mysql',
-  host: 'localhost'
+  host: 'localhost',
+  port: 3307
 });
 
 module.exports = sequelize;
