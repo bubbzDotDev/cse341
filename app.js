@@ -1,4 +1,6 @@
 require('dotenv').config();
+const cors = require('cors');
+
 const username = process.env.MONGO_USER_NAME;
 const password = process.env.MONGO_PASSWORD;
 
@@ -36,9 +38,24 @@ app.use(shopRoutes);
 
 app.use(errorController.get404);
 
+const corsOptions = {
+  origin: "https://byui-chris-cse341.herokuapp.com/",
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
+
+const options = {
+  family: 4
+};
+
+const MONGODB_URL = process.env.MONGODB_URL || `mongodb+srv://${username}:${password}@cluster0.1agtp.mongodb.net/shop?retryWrites=true&w=majority`;
+
+const PORT = process.env.PORT || 3000;
+
 mongoose
   .connect(
-    `mongodb+srv://${username}:${password}@cluster0.1agtp.mongodb.net/shop?retryWrites=true&w=majority`
+    MONGODB_URL, options
   )
   .then(result => {
     User.findOne().then(user => {
@@ -53,7 +70,7 @@ mongoose
         user.save();
       }
     });
-    app.listen(3000);
+    app.listen(PORT);
   })
   .catch(err => {
     console.log(err);
