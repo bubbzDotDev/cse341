@@ -70,14 +70,16 @@ app.use(authRoutes);
 app.use(errorController.get404);
 
 const corsOptions = {
-  origin: "https://byui-chris-cse341.herokuapp.com/",
+  origin: process.env.HEROKU_URL,
   optionsSuccessStatus: 200
 };
 
 app.use(cors(corsOptions));
 
 const options = {
-  family: 4
+  family: 4,
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 };
 
 const PORT = process.env.PORT || 3000;
