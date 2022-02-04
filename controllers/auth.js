@@ -83,7 +83,7 @@ exports.postSignup = (req, res, next) => {
       res.redirect('/login');
       return transporter.sendMail({
         to: email,
-        from: 'bubbz@bubbz.dev',
+        from: process.env.SENDER_EMAIL,
         subject: 'Signup successful',
         html: '<h1>You successfully signed up!</h1>'
       });
