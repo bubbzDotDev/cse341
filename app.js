@@ -14,10 +14,7 @@ const flash = require('connect-flash');
 const errorController = require('./controllers/error');
 const User = require('./models/user');
 
-const username = process.env.MONGO_USER_NAME;
-const password = process.env.MONGO_PASSWORD;
-
-const MONGODB_URL = process.env.MONGODB_URL || `mongodb+srv://${username}:${password}@cluster0.1agtp.mongodb.net/shop`;
+const MONGODB_URL = process.env.MONGODB_URL;
 
 const app = express();
 const store = new MongoDBStore({
